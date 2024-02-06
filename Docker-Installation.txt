@@ -71,7 +71,7 @@ To create the docker group and add your user:
 
     2.Add your user to the docker group.
 
-     sudo usermod -aG docker $USER    (here add your username "faseeh")
+     sudo usermod -aG docker $USER    (here add your username "fa***h")
 
     3.Log out and log back in so that your group membership is re-evaluated.
 
