@@ -84,10 +84,10 @@ When you first access a new Jenkins instance, you are asked to unlock it using a
  
 2.Creating the first administrator user:
 
- username: faseeh22
+ username: fa**22
  password: f********2
- full name: Faseeh Haider
- email address: haiderfaseeh91@gmail.com
+ full name: F** H**r
+ email address: hai****91@gmail.com
 
  Click on "save and continue"
 
