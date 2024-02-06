@@ -1,0 +1,66 @@
+
+
+Installing Ansible on Ubuntu
+
+Ubuntu builds are available in a PPA here.
+
+To configure the PPA on your system and install Ansible run these commands:
+
+$ sudo apt update
+$ sudo apt install software-properties-common
+$ sudo add-apt-repository --yes --update ppa:ansible/ansible
+$ sudo apt install ansible
+
+
+
+
+
+==> Ansible Installation on Ubuntu:
+> sudo apt update
+> sudo apt install software-properties-common
+> sudo apt-add-repository ppa:ansible/ansible
+> sudo apt update
+> sudo apt install ansible
+> ansible -version
+Step -1:
+==> Go to hosts file inside ansible server and paste private-ip of node.
+> nano /etc/ansible/hosts
+[demo]
+192.168.10.15
+Step -2:
+> nano /etc/ansible/ansible.cfg            --> Uncomment these lines.
+....
+#inventory  = /etc/ansible/ansible.cfg
+#sudo-user  = root
+Step -3:
+==> Create One User in all hosts machines(Node)
+> adduser ansible              --> Create user.
+> passwd ansible               --> Set Password.
+> su - ansible                 --> For switch in user ansible.
+Step -4:
+==> Give sudo privilages to ansible user.
+> visudo
+....
+root     ALL=(ALL)  ALL
+ansible  ALL=(ALL)  NOPASSWD: ALL             --> Add this line under the root for give all privilages.
+:: Do this with all other nodes.
+Step -5: Now Establish connection between server at Node do this changes at all machines.
+==> nano /etc/ssh/sshd_config          --> Do some changes in this file.
+#PermitRootLogin           Yes         --> Uncomment it.
+#PasswordAuthentication    Yes         --> Uncomment it.
+#PermitEmptyPasswords      NO
+#PasswordAuthentication    No          --> Comment it.
+~ Save it. Now do same changes at all nodes.
+> Service sshd restart
+Step -6: Now verify in ansible server.
+> su - ansible
+> ssh ip_address   --> Node1 ip.
+:: Now it will ask for password so do passwordless Authentication.
+Step -7: Password less Authentication.
+> ssh-keygen       --> This will create pub. priv.key
+> ls -a            --> O/P   :   .ssh
+> cd .ssh          --> O/P   :   id_rsa   id_rsa_pub
+> ssh-copy-id ansible@ip_address              --> Write private ip of the machine which you want to access.
+> cd ..
+> ssh ip_addres                     --> Node ip.
+:: Now, you will enter into node without password.
