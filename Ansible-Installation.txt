@@ -21,7 +21,7 @@ $ sudo apt install ansible
 > sudo apt-add-repository ppa:ansible/ansible
 > sudo apt update
 > sudo apt install ansible
-> ansible -version
+> ansible --version
 Step -1:
 ==> Go to hosts file inside ansible server and paste private-ip of node.
 > nano /etc/ansible/hosts
