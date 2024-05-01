@@ -6,23 +6,19 @@ Ubuntu builds are available in a PPA here.
 
 To configure the PPA on your system and install Ansible run these commands:
 
-$ sudo apt update
-$ sudo apt install software-properties-common
-$ sudo add-apt-repository --yes --update ppa:ansible/ansible
-$ sudo apt install ansible
-
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible
+ansible --version
 
 NOTE: If you don't have "ansible config" and "ansible host" files then, use this link: https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg
 And if you don't have "sshd" then use this command "sudo apt install openssh-server"
- 
 
-==> Ansible Installation on Ubuntu:
-> sudo apt update
-> sudo apt install software-properties-common
-> sudo apt-add-repository ppa:ansible/ansible
-> sudo apt update
-> sudo apt install ansible
-> ansible --version
+
+ BELOW ARE THE STEPS FOR CREATING  PASSWORDLESS CONNECTIONS ON SERVERS, BUT WE ONLY ADDED ONE SERVER WHICH IS OUR OWN SERVER.
+
+
 Step -1:
 ==> Go to hosts file inside ansible server and paste private-ip of node.
 > nano /etc/ansible/hosts
@@ -33,11 +29,16 @@ Step -2:
 ....
 #inventory  = /etc/ansible/ansible.cfg
 #sudo-user  = root
+
+
 Step -3:
 ==> Create One User in all hosts machines(Node)
 > adduser ansible              --> Create user.
 > passwd ansible               --> Set Password.
 > su - ansible                 --> For switch in user ansible.
+> type "exit" and press enter
+
+
 Step -4:
 ==> Give sudo privilages to ansible user.
 > visudo
@@ -45,6 +46,8 @@ Step -4:
 root     ALL=(ALL)  ALL
 ansible  ALL=(ALL)  NOPASSWD: ALL             --> Add this line under the root for give all privilages.
 :: Do this with all other nodes.
+
+
 Step -5: Now Establish connection between server at Node do this changes at all machines.
 ==> nano /etc/ssh/sshd_config          --> Do some changes in this file.
 #PermitRootLogin           Yes         --> Uncomment it.
@@ -56,7 +59,9 @@ Step -5: Now Establish connection between server at Node do this changes at all 
 Step -6: Now verify in ansible server.
 > su - ansible
 > ssh ip_address   --> Node1 ip.
-:: Now it will ask for password so do passwordless Authentication.
+
+
+:: Now it will Ask for Password, So Do Passwordless Authentication Below.
 Step -7: Password less Authentication.
 > ssh-keygen       --> This will create pub. priv.key
 > ls -a            --> O/P   :   .ssh
